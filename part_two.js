@@ -1,10 +1,4 @@
-const input = `two1nine
-eightwothree
-abcone2threexyz
-xtwone3four
-4nineeightseven2
-zoneight234
-7pqrstsixteen`;
+const input = `1threegkhpq7nfrksvm69nxpvgvthfzoneighttc`;
 
 const inputInArray = input.split('\n');
 
@@ -52,6 +46,7 @@ function convertStringInNumber(string){
 const mappedInput = inputInArray.map(singleInput => {
     const inputNumbersArray = singleInput.match(regex)
     const inputNumbersString = `${convertStringInNumber(inputNumbersArray.at(0))}${convertStringInNumber(inputNumbersArray.at(-1))}`
+    console.log(inputNumbersString);
     return +inputNumbersString
 })
 
