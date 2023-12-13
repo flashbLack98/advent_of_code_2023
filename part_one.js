@@ -5,7 +5,7 @@ treb7uchet`;
 
 const inputInArray = input.split('\n');
 
-const regex = /(one|two|three|four|five|six|seven|eight|nine|zero|\d)/g;
+const regex = /\d/g;
 
 const mappedInput = inputInArray.map(singleInput => {
     const inputNumbersArray = singleInput.match(regex)

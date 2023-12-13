@@ -1,8 +1,15 @@
-const input = `1threegkhpq7nfrksvm69nxpvgvthfzoneighttc`;
+const input = `two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen`;
 
 const inputInArray = input.split('\n');
 
-const regex = /(one|two|three|four|five|six|seven|eight|nine|zero|\d)/g;
+const regex = /(one|two|three|four|five|six|seven|eight|nine|\d)/g;
+const invertedRegex = /(eno|owt|eerht|ruof|evif|xis|neves|thgie|enin|\d)/g;
 
 function convertStringInNumber(string){
     switch (string) {
@@ -43,10 +50,48 @@ function convertStringInNumber(string){
     }
 }
 
+function convertInvertedStringInNumber(string){
+    switch (string) {
+        case "eno":
+            return 1
+            break;
+        case "owt":
+            return 2
+            break;
+        case "eerht":
+            return 3
+            break;
+        case "ruof":
+            return 4
+            break;
+        case "evif":
+            return 5
+            break;
+        case "xis":
+            return 6
+            break;
+        case "neves":
+            return 7
+            break;
+        case "thgie":
+            return 8
+            break;
+        case "enin":
+            return 9
+            break;
+        default:
+            return string
+            break;
+    }
+}
+
 const mappedInput = inputInArray.map(singleInput => {
     const inputNumbersArray = singleInput.match(regex)
-    const inputNumbersString = `${convertStringInNumber(inputNumbersArray.at(0))}${convertStringInNumber(inputNumbersArray.at(-1))}`
-    console.log(inputNumbersString);
+    const reversedString = singleInput.split("").reduce((acc, char) => char + acc, "");
+    const invertedInputNumbersArray = reversedString.match(invertedRegex)
+
+    
+    const inputNumbersString = `${convertStringInNumber(inputNumbersArray.at(0))}${convertInvertedStringInNumber(invertedInputNumbersArray.at(0))}`
     return +inputNumbersString
 })
 
