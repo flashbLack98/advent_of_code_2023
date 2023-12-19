@@ -66,26 +66,23 @@ const formattedArrayGames = arrayGames.map(game => {
     return setsArray;
 });
 
+const powersArray = [];
 
-const idsArray = [];
-
-formattedArrayGames.forEach((game, index) => {
-    const wrongIdsArrayPerGame = [];
-    game.forEach((set) => {
-        if (set.red <= bagQuantityObject.red && set.blue <= bagQuantityObject.blue && set.green <= bagQuantityObject.green) {
-            wrongIdsArrayPerGame.push(index + 1);
-        } else {
-            wrongIdsArrayPerGame.push(0);
-        }
+formattedArrayGames.forEach(game => {
+    const [redValues, greenValues, blueValues] = [[], [], []];
+    game.forEach(set => {
+        redValues.push(set.red);
+        blueValues.push(set.blue);
+        greenValues.push(set.green);
     });
 
-    if (!wrongIdsArrayPerGame.includes(0)) {
-        idsArray.push(index + 1);
-    }
+    const [redMaxValue, blueMaxValue, greenMaxValue] = [Math.max(...redValues), Math.max(...blueValues), Math.max(...greenValues)];
 
+    const maxValuePerColor = [redMaxValue, blueMaxValue, greenMaxValue];
+
+    const powerGame = maxValuePerColor.reduce((accumulator, currentValue) => accumulator * currentValue)
+    powersArray.push(powerGame)
 });
 
-const sumOfAllIds = idsArray.reduce((previousValue, currentValue) => previousValue + currentValue);
-
-console.log(sumOfAllIds);
-
+const sumOfPowers = powersArray.reduce((previousValue,currentValue) => previousValue + currentValue )
+console.log(sumOfPowers);
