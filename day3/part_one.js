@@ -38,19 +38,37 @@ const INPUT = `467..114..
 ..592.....
 ......755.
 ...$.*....
-.664.598..`
+.664.598..`;
 
-const regex = /[^.\d]/g;
+const regexSymbol = /[^.\d]/g;
+const regexNumber = /\d/g;
 
 
-const schematicArray = INPUT.split('\n')
+const schematicArray = INPUT.split('\n');
+
 
 const symbolPositonArray = schematicArray.map(row => {
-    const symbolPosition = row.indexOf(row.match(regex));
+    const symbolPosition = row.indexOf(row.match(regexSymbol));
     return symbolPosition;
-})
+});
+
+const numberPositionArray = schematicArray.map(row => {
+
+    const numberArray = row.match(regexNumber);
+    if (numberArray) {
+
+        return numberArray.map(string =>  row.indexOf(+string));
+        //todo c'è un bug 
+        /* 
+            se un numero è già presente viene preso sempre la posizione del primo numero es ( 467..114.. -> [ 0, 1, 2, 5, 5, 0 ])
+        */
+    } else {
+        return [-1];
+    }
+
+});
 
 
 
-console.log(symbolPositonArray);
+console.log(numberPositionArray);
 
