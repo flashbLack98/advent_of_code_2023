@@ -32,8 +32,7 @@ const formattedArrayGames = arrayGames.map(game => {
         const colorCubes = set.split(",");
 
         colorCubes.forEach(color => {
-            const cubesColor = color.split(" ")[2];
-            const cubesQuantity = color.split(" ")[1];
+            const [cubesQuantity, cubesColor] = color.trim().split(" ");
 
             setObject[cubesColor] = cubesQuantity;
         });
